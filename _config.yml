@@ -11,8 +11,6 @@ navigation:
     url: /about
   - name: 分类
     url: /category
-  - name: App发行版本
-    url: https://github.com/iqo3333/iqo3333.github.io/releases
   - name: 博客主站
     url: https://www.iqo3333.top
     
@@ -26,8 +24,8 @@ footer-links:
   facebook:
   github: iqo3333
   rss: # just type anything here for a working RSS icon
-  twitter: 
-  youtube:
+  twitter: iqo3333
+  youtube:iqo3333
 
 footer-text: © Pro_Pro 2023-2024. All Rights Reserved. 
 
