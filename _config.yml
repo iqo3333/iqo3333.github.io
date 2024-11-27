@@ -11,8 +11,8 @@ navigation:
     url: /about
   - name: 分类
     url: /category
-  - name: 博客主站
-    url: https://www.iqo3333.top
+  - name: 跳转页
+    url: https://vlink.cc/iqo3333
     
 paginate: 8
 
