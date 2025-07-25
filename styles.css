@@ -1,85 +1,129 @@
 html, body {
-    overflow-x: hidden;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #6e8efb, #a777e3);
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  font-family: "Segoe UI", "Helvetica Neue", "Arial", sans-serif;
+  background: linear-gradient(135deg, rgb(214, 238, 250), rgb(180, 222, 250), rgb(240, 248, 255));
+  background-size: cover;
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+  overflow: hidden;
+  cursor: default;
 }
 
-.container {
-    background: rgba(255, 255, 255, 0.95);
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    width: 90%;
-    max-width: 480px;
-    animation: fadeIn 0.8s ease-in-out;
+.message-box {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 40px 50px;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  max-width: 90%;
+  text-align: center;
+  animation: fadeInUp 1.5s ease-out;
+  z-index: 1;
 }
 
-h1 {
-    color: #333;
-    font-size: 28px;
-    margin-bottom: 20px;
+.message-box h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #333;
 }
 
-p {
-    font-size: 16px;
-    color: #555;
-    margin-bottom: 20px;
+.message-box p {
+  font-size: 18px;
+  line-height: 1.8;
+  color: #444;
+  margin: 10px 0;
 }
 
-footer {
-    margin-top: 30px;
-    font-size: 14px;
-    color: #666;
-    text-align: center;
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.footer-links {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 10px;
+.typewriter-text::after {
+  content: '|';
+  animation: blink 1s infinite;
+  margin-left: 4px;
 }
 
-/* 图标样式 */
-.icon-img {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 5px;
-    display: block;
+/* 添加此类，隐藏光标 */
+.no-caret::after {
+  content: none !important;
+  animation: none !important;
 }
 
-.icon-img:hover {
-    transform: scale(1.1) rotate(-5deg);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
-/* 响应式设计 */
-@media (max-width: 480px) {
-    .container {
-        padding: 25px 15px;
-    }
-
-    .icon-img {
-        width: 35px;
-        height: 35px;
-    }
+/* 爱心样式 */
+.heart {
+  position: absolute;
+  font-size: 16px;
+  user-select: none;
+  animation: floatUp 1s ease-out forwards;
+  z-index: 1000;
+  pointer-events: none;
 }
 
-/* 动画效果 */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
+@keyframes floatUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100px) scale(1.8);
+  }
+}
+
+/* 星星样式 */
+.trail-star {
+  position: absolute;
+  font-size: 14px;
+  color: gold;
+  opacity: 0.9;
+  animation: starFade 0.8s ease-out forwards;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+@keyframes starFade {
+  0% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+}
+
+.right-align {
+  text-align: right;
+}
+
+/* 禁止文本选择 */
+body, body * {
+  -webkit-user-select: none;  /* Safari */
+  -moz-user-select: none;     /* Firefox */
+  -ms-user-select: none;      /* IE10+ */
+  user-select: none;          /* 标准 */
+  -webkit-touch-callout: none; /* 禁止iOS长按弹出菜单 */
+}
+
+/* 禁止拖动图片或其他元素 */
+img, a, button {
+  -webkit-user-drag: none;
+  user-drag: none;
 }
