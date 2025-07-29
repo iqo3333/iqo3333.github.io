@@ -1,17 +1,21 @@
 const lines = [
-  "感谢一路陪伴与信任，本站已于 2025年7月25日 起停止服务。",
-  "每一次访问，都是我前行的动力。祝您未来一切顺利！",
+  "感谢您的访问。",
+  "本域名仅用于 Lynn Che 的私人邮箱后缀，不作为网站使用，也不对外提供任何服务。",
+  "若您是因邮件往来访问此地址，请忽略本页面，感谢理解。",
+  "祝一切顺利！",
   "——Lynn Che"
 ];
 
 function typeWriter(elementId, text, delay = 40, callback) {
   const el = document.getElementById(elementId);
+  el.textContent = ""; // 清空初始内容
   let i = 0;
   function typing() {
     if (i <= text.length) {
       el.textContent = text.slice(0, i++);
       setTimeout(typing, delay);
     } else {
+      el.classList.add("no-caret"); // 打字完成后再隐藏光标
       if (callback) callback();
     }
   }
@@ -25,10 +29,16 @@ setTimeout(() => {
       document.getElementById("line2").classList.add("no-caret");
       typeWriter("line3", lines[2], 40, () => {
         document.getElementById("line3").classList.add("no-caret");
+        typeWriter("line4", lines[3], 40, () => {
+          document.getElementById("line4").classList.add("no-caret");
+          typeWriter("line5", lines[4], 40, () => {
+            document.getElementById("line5").classList.add("no-caret");
+          });
+        });
       });
     });
   });
-}, 600);
+}, 600); // ✅ 多补一个右括号，这才是 setTimeout 的结尾
 
 
 // 🌈 爱心颜色数组
