@@ -1,4 +1,3 @@
-let currentDomain = "";
 const progressCircle = document.querySelector(".progress-ring .progress");
 const progressText = document.getElementById("progress-text");
 const circumference = 2 * Math.PI * 54; // r=54
@@ -8,14 +7,12 @@ function setProgress(percent) {
     progressCircle.style.strokeDashoffset = offset;
 }
 
-document.querySelectorAll(".domain-selector button").forEach(btn => {
-    btn.addEventListener("click", () => {
-        currentDomain = btn.dataset.domain;
-        document.getElementById("current-domain").innerText = currentDomain;
-    });
-});
-
 document.getElementById("start-test").addEventListener("click", async () => {
+    const domainSelect = document.getElementById("domain-select");
+    const loopInput = document.getElementById("loop-count");
+    const currentDomain = domainSelect.value;
+    const loopCount = parseInt(loopInput.value) || 5;
+
     if (!currentDomain) {
         alert("请选择要测试的域名！");
         return;
@@ -26,7 +23,7 @@ document.getElementById("start-test").addEventListener("click", async () => {
     document.getElementById("ping-result").innerText = "-";
     document.getElementById("download-result").innerText = "-";
 
-    // 测试5次延迟，实时更新
+    // 测试5次延迟
     let pingTimes = [];
     for (let i = 0; i < 5; i++) {
         const start = performance.now();
@@ -40,26 +37,31 @@ document.getElementById("start-test").addEventListener("click", async () => {
     document.getElementById("ping-result").innerText = `${avgPing} ms`;
     setProgress(50);
 
-    // 下载测速
+    // 循环下载测速
     progressText.innerText = "测试下载...";
-    const totalSize = 25 * 1024 * 1024; // 25MB
-    let loaded = 0;
+    const totalSizePerFile = 25 * 1024 * 1024; // 25MB
+    let totalLoaded = 0;
     const downloadStart = performance.now();
-    const res = await fetch(`${currentDomain}/testfile.bin?nocache=${Math.random()}`);
-    const reader = res.body.getReader();
 
-    while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        loaded += value.length;
-        const now = performance.now();
-        const timeSec = (now - downloadStart) / 1000;
-        if (timeSec > 0) {
-            const speed = ((loaded * 8) / (timeSec * 1024 * 1024)).toFixed(2);
-            document.getElementById("download-result").innerText = `${speed} Mbps`;
-            // 进度按下载大小比例估算
-            let percent = 50 + Math.min((loaded / totalSize) * 50, 50);
-            setProgress(percent);
+    for (let loop = 0; loop < loopCount; loop++) {
+        let loaded = 0;
+        const res = await fetch(`${currentDomain}/testfile.bin?nocache=${Math.random()}`);
+        const reader = res.body.getReader();
+
+        while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            loaded += value.length;
+            totalLoaded += value.length;
+
+            const now = performance.now();
+            const timeSec = (now - downloadStart) / 1000;
+            if (timeSec > 0) {
+                const speed = ((totalLoaded * 8) / (timeSec * 1024 * 1024)).toFixed(2);
+                document.getElementById("download-result").innerText = `${speed} Mbps`;
+                let percent = 50 + Math.min((totalLoaded / (totalSizePerFile * loopCount)) * 50, 50);
+                setProgress(percent);
+            }
         }
     }
 

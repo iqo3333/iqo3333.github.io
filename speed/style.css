@@ -1,47 +1,89 @@
+/* 背景渐变 */
 body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, rgb(214, 238, 250), rgb(180, 222, 250), rgb(240, 248, 255));
-    background-size: cover;
-    background-attachment: fixed;
-    color: #333;
     margin: 0;
-    padding: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, rgb(214, 238, 250), rgb(180, 222, 250), rgb(240, 248, 255));
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100vh;
 }
 
+/* 白色容器 */
 .container {
-    max-width: 500px;
-    margin: 50px auto;
+    background-color: #ffffff;
+    padding: 30px 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    width: 350px;
     text-align: center;
-    background: #fff;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+/* 标题 */
+.container h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
     color: #333;
 }
 
-h1 {
-    margin-bottom: 20px;
-    color: #222;
+/* 表单组居中排列 */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
 }
 
-.domain-selector button {
-    background: rgb(180, 222, 250);
-    border: none;
-    padding: 10px 15px;
-    margin: 5px;
-    border-radius: 8px;
+/* 下拉框和输入框统一样式 */
+select, input[type="number"] {
+    width: 60%;               /* 输入框和选择框不要太长 */
+    padding: 8px 12px;
+    border-radius: 10px;      /* 圆角 */
+    border: 1px solid #ccc;
+    font-size: 16px;
+    margin-top: 5px;          /* 标签与控件间距 */
+    text-align: center;       /* 输入文字居中 */
+    background-color: rgb(240, 248, 255); /* 浅蓝背景 */
+    color: #333;
+    outline: none;
+}
+
+/* 优化选择框弹出菜单样式 */
+select {
+    appearance: none;          /* 移除默认样式 */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
     cursor: pointer;
-    color: #055a8c;
-    font-weight: 600;
-    transition: background 0.3s ease;
 }
 
-.domain-selector button:hover {
-    background: rgb(140, 190, 230);
+/* 鼠标悬停改变边框颜色 */
+select:hover, input[type="number"]:hover {
+    border-color: rgb(100, 180, 250);
 }
 
-/* 测速进度环 */
+/* 按钮居中 */
+button {
+    display: block;
+    margin: 0 auto 20px auto;
+    background-color: rgb(100, 180, 250);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 15px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: rgb(70, 150, 220);
+}
+
+/* 进度环 */
 .progress-ring {
     position: relative;
     width: 150px;
@@ -51,57 +93,45 @@ h1 {
 
 .progress-ring svg {
     transform: rotate(-90deg);
-    width: 100%;
-    height: 100%;
+    width: 150px;
+    height: 150px;
 }
 
 .progress-ring circle {
-    fill: none;
+    fill: transparent;
     stroke-width: 12;
     stroke-linecap: round;
+    stroke: rgb(100, 180, 250);
 }
 
-.progress-ring .bg {
-    stroke: rgba(0, 0, 0, 0.1);
+.progress-ring circle.bg {
+    stroke: #eee;
 }
 
-.progress-ring .progress {
-    stroke: rgb(14, 104, 194);
-    stroke-dasharray: 339.292; /* 2πr (r=54) */
+.progress-ring circle.progress {
+    stroke-dasharray: 339.292; /* 2*PI*54 */
     stroke-dashoffset: 339.292;
     transition: stroke-dashoffset 0.2s linear;
 }
 
+/* 中心文字 */
 .progress-text {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 18px;
-    color: #055a8c;
-    font-weight: 600;
-}
-
-/* 结果区 */
-.results p {
-    font-size: 18px;
-    margin: 10px 0;
+    font-weight: bold;
     color: #333;
 }
 
-#start-test {
-    margin-top: 20px;
-    background: rgb(14, 104, 194);
-    border: none;
-    padding: 12px 20px;
-    color: #fff;
-    font-size: 18px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 700;
-    transition: background 0.3s ease;
+/* 测速结果 */
+.results {
+    margin-top: 15px;
+    font-size: 16px;
+    color: #333;
 }
 
-#start-test:hover {
-    background: rgb(10, 75, 140);
+.results p {
+    margin: 5px 0;
 }
