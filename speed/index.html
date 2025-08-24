@@ -10,26 +10,33 @@
   <div class="container">
     <h1>LynnChe服务速率测试</h1>
 
-<div class="custom-select-wrapper">
-  <div class="custom-select">
-    <div class="select-selected">请选择域名</div>
-    <div class="select-items">
-      <div data-value="https://www.iqo3333.cn">LynnChe私人邮箱</div>
-      <div data-value="https://tab.iqo3333.cn">LynnChe-标签页</div>
-      <div data-value="https://vip.iqo3333.cn">LynC视频解析</div>
+    <!-- 文件上传验证白名单 -->
+    <div class="file-verify">
+      <input type="file" id="fileInput" accept=".txt">
+      <button id="verifyBtn">验证白名单</button>
     </div>
-  </div>
-</div>
 
+    <!-- 自定义下拉选择域名 -->
+    <div class="custom-select-wrapper">
+      <div class="custom-select">
+        <div class="select-selected">请选择域名</div>
+        <div class="select-items">
+          <div data-value="https://www.iqo3333.cn">LynnChe私人邮箱</div>
+          <div data-value="https://tab.iqo3333.cn">LynnChe-标签页</div>
+          <div data-value="https://vip.iqo3333.cn">LynC视频解析</div>
+        </div>
+      </div>
+    </div>
 
-<div class="form-group">
-  <label for="loop-count">循环次数（下载次数）：</label>
-  <input type="number" id="loop-count" value="5" min="1" max="20">
-</div>
-
+    <!-- 循环次数输入 -->
+    <div class="form-group">
+      <label for="loop-count">循环次数（下载次数）：</label>
+      <input type="number" id="loop-count" value="5" min="1" max="20">
+    </div>
 
     <button id="start-test">开始测速</button>
 
+    <!-- 进度环 -->
     <div class="progress-ring">
       <svg>
         <circle class="bg" cx="75" cy="75" r="54"/>
@@ -38,6 +45,7 @@
       <div id="progress-text" class="progress-text">0%</div>
     </div>
 
+    <!-- 测速结果 -->
     <div class="results">
       <p>延迟：<span id="ping-result">-</span></p>
       <p>下载速度：<span id="download-result">-</span></p>

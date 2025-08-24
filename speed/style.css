@@ -285,3 +285,47 @@ textarea {
   -moz-user-select: text;
   -ms-user-select: text;
 }
+/* ------------------ 文件上传验证白名单 ------------------ */
+.file-verify {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.file-verify input[type="file"] {
+    display: none; /* 文件选择框隐藏，由按钮触发 */
+}
+
+.file-verify button {
+    width: 200px;
+    padding: 12px 20px;
+    border-radius: 15px;
+    font-size: 16px;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(12px) saturate(180%) brightness(1.05);
+    -webkit-backdrop-filter: blur(12px) saturate(180%) brightness(1.05);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #333;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.file-verify button:hover {
+    transform: scale(1.03);
+    background: rgba(255,255,255,0.35);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+.file-verify button:active {
+    transform: scale(0.97);
+}
+
+/* 文本提示（可选） */
+.file-verify p {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+}
