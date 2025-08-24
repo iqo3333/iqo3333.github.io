@@ -9,21 +9,35 @@ body {
     height: 100vh;
 }
 
-/* 白色容器 */
+/* 白色容器（液态玻璃效果 + 新颜色） */
 .container {
-    background-color: #ffffff;
-    padding: 30px 40px;
-    border-radius: 20px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    width: 350px;
+    position: relative;
+    z-index: 998;
+    width: 25vw;
+    max-width: 500px;
+    min-width: 280px;
+    margin: 40px;
+    padding: 25px;
     text-align: center;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    color: #333;
+    flex-shrink: 0;
+    opacity: 0;
+    transform: translateY(-30px);
+    animation: fadeSlideDown 0.8s ease-out forwards;
+    will-change: transform, opacity;
 }
 
 /* 标题 */
 .container h1 {
     margin-bottom: 20px;
     font-size: 24px;
-    color: #333;
+    color: #2d3e50;
 }
 
 /* 表单组居中排列 */
@@ -34,56 +48,144 @@ body {
     margin-bottom: 15px;
 }
 
-/* 下拉框和输入框统一样式 */
+/* 下拉框和输入框统一样式（液态玻璃） */
 select, input[type="number"] {
-    width: 60%;               /* 输入框和选择框不要太长 */
-    padding: 8px 12px;
-    border-radius: 10px;      /* 圆角 */
-    border: 1px solid #ccc;
+    width: 60%;                   /* 宽度统一 */
+    padding: 10px 14px;           /* 内边距统一 */
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.3);
     font-size: 16px;
-    margin-top: 5px;          /* 标签与控件间距 */
-    text-align: center;       /* 输入文字居中 */
-    background-color: rgb(240, 248, 255); /* 浅蓝背景 */
+    margin: 10px 0 15px 0;        /* 上下间距统一，下方留空间 */
+    text-align: center;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(12px) saturate(180%) brightness(1.05);
+    -webkit-backdrop-filter: blur(12px) saturate(180%) brightness(1.05);
     color: #333;
     outline: none;
+    cursor: pointer;
+    box-sizing: border-box;       /* 保证内边距不影响宽度 */
+}
+/* 容器 */
+.custom-select-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 260px;
+  font-size: 16px;
+  margin-bottom: 15px; /* 控制选择框与下方输入框的距离 */
 }
 
-/* 优化选择框弹出菜单样式 */
-select {
-    appearance: none;          /* 移除默认样式 */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    background-size: 12px;
-    cursor: pointer;
+/* 外层玻璃框 */
+.custom-select {
+  position: relative;
+  user-select: none;
+}
+
+/* 选中项（始终可见） */
+.select-selected {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(12px) saturate(180%) brightness(1.05);
+  -webkit-backdrop-filter: blur(12px) saturate(180%) brightness(1.05);
+  border-radius: 12px;
+  padding: 10px 14px;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #333;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+/* 倒三角箭头 */
+.select-selected::after {
+  content: "▼";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: #6e8efb;
+  transition: transform 0.3s ease;
+}
+
+/* 激活时箭头旋转 */
+.select-selected.active::after {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+/* 下拉项容器 */
+.select-items {
+  position: absolute;
+  background: rgba(215, 237, 253, 0.8);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(14px) saturate(180%);
+  border-radius: 12px;
+  margin-top: 6px;
+  width: 100%;
+  z-index: 99;
+  border: 0px solid rgba(255,255,255,0.3);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  overflow: hidden;
+  display: none; /* 默认隐藏 */
+  animation: fadeSlide 0.25s ease forwards;
+}
+
+/* 下拉项 */
+.select-items div {
+  padding: 10px 14px;
+  cursor: pointer;
+  color: #333;
+  transition: background 0.25s ease;
+}
+
+/* hover 效果 */
+.select-items div:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* 动画 */
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* 鼠标悬停改变边框颜色 */
 select:hover, input[type="number"]:hover {
-    border-color: rgb(100, 180, 250);
+    border-color: rgba(100, 180, 250, 0.8);
 }
 
-/* 按钮居中 */
+
+/* 按钮（液态玻璃效果） */
 button {
     display: block;
     margin: 0 auto 20px auto;
-    background-color: rgb(100, 180, 250);
-    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px) saturate(180%) brightness(1.05);
+    -webkit-backdrop-filter: blur(12px) saturate(180%) brightness(1.05);
+    color: #333;
     border: none;
-    padding: 10px 20px;
+    padding: 12px 20px;
     border-radius: 15px;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
 }
 
 button:hover {
-    background-color: rgb(70, 150, 220);
+    transform: scale(1.03);
+    background: rgba(255,255,255,0.25);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
 }
 
-/* 进度环 */
+button:active {
+    transform: scale(0.97);
+}
+
+/* 进度环（液态玻璃底） */
 .progress-ring {
     position: relative;
     width: 150px;
@@ -101,14 +203,14 @@ button:hover {
     fill: transparent;
     stroke-width: 12;
     stroke-linecap: round;
-    stroke: rgb(100, 180, 250);
 }
 
 .progress-ring circle.bg {
-    stroke: #eee;
+    stroke: rgba(255,255,255,0.25);
 }
 
 .progress-ring circle.progress {
+    stroke: rgb(100, 180, 250);
     stroke-dasharray: 339.292; /* 2*PI*54 */
     stroke-dashoffset: 339.292;
     transition: stroke-dashoffset 0.2s linear;
@@ -120,10 +222,14 @@ button:hover {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     color: #333;
+    pointer-events: none;
+    white-space: nowrap; /* 防止换行 */
+    text-align: center;  /* 水平居中 */
 }
+
 
 /* 测速结果 */
 .results {
@@ -134,4 +240,48 @@ button:hover {
 
 .results p {
     margin: 5px 0;
+}
+
+/* 动画关键帧 */
+@keyframes fadeSlideDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 允许输入框选中文本 */
+input[type="number"] {
+    user-select: text;
+}
+
+/* 全局禁止文本选择 */
+body, button, select, .container, .form-group {
+    user-select: none;
+}
+/* ------------------ 动画 ------------------ */
+@keyframes fadeSlideDown { 0% {opacity:0; transform:translateY(-30px);} 100%{opacity:1; transform:translateY(0);} }
+@keyframes fadeInFooter { 0% {opacity:0; transform:translateY(20px);} 100% {opacity:1; transform:translateY(0);} }
+@keyframes float-up {0%{transform:translateY(0) scale(1);opacity:1;}100%{transform:translateY(-30px) scale(1.5);opacity:0;}}
+
+
+/* ------------------ 爱心动画 ------------------ */
+.heart {
+  position: absolute;
+  font-size: 16px;
+  pointer-events: none;
+  animation: float-up 1s ease-out forwards;
+  will-change: transform, opacity; /* ⚡ 提前告知浏览器优化 */
+}
+
+input[type="text"],
+textarea {
+  user-select: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
 }
