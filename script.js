@@ -1,6 +1,6 @@
 const lines = [
   "感谢您的访问。",
-  "本域名仅用于 Lynn Che 的私人邮箱后缀，不作为网站使用，也不对外提供任何服务。",
+  "本域名仅用于 Lynn Che 的私人邮箱，不作为网站使用，也不对外提供任何服务。",
   "若您是因邮件往来访问此地址，请忽略本页面，感谢理解。",
   "祝一切顺利！",
   "——Lynn Che"
@@ -41,10 +41,10 @@ setTimeout(() => {
 }, 600); // ✅ 多补一个右括号，这才是 setTimeout 的结尾
 
 
-// 🌈 爱心颜色数组
+// ------------------ 爱心点击效果 ------------------
 const colors = ['#e25555', '#ff69b4', '#ff9933', '#66ccff', '#9933ff', '#ff3399'];
 
-// 🎉 点击时生成多个爱心
+// 点击时生成多个爱心
 document.addEventListener("click", function(e) {
   for (let i = 0; i < 6; i++) {
     createHeart(e.clientX + Math.random() * 1 - 1, e.clientY + Math.random() * 1 - 1);
@@ -54,24 +54,13 @@ document.addEventListener("click", function(e) {
 function createHeart(x, y) {
   const heart = document.createElement("div");
   heart.className = "heart";
-  heart.innerText = "❤️";
+  heart.innerText = "❤";
   heart.style.left = x + "px";
   heart.style.top = y + "px";
   heart.style.color = colors[Math.floor(Math.random() * colors.length)];
   document.body.appendChild(heart);
   setTimeout(() => heart.remove(), 1000);
 }
-
-// 🐭 鼠标移动时生成星星拖尾
-document.addEventListener("mousemove", function(e) {
-  const star = document.createElement("div");
-  star.className = "trail-star";
-  star.innerText = "✨";
-  star.style.left = e.pageX + "px";
-  star.style.top = e.pageY + "px";
-  document.body.appendChild(star);
-  setTimeout(() => star.remove(), 800);
-});
 
 // 阻止触摸拖动选中（防止移动端长按选中文字）
 document.addEventListener('touchstart', function(e) {

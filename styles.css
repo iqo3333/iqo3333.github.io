@@ -14,15 +14,34 @@ html, body {
   cursor: default;
 }
 
+/* 父容器样式 */
 .message-box {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.25);      /* 半透明白色玻璃 */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* 边框颜色一致 */
+  backdrop-filter: blur(8px);                /* 模糊一致 */
+  -webkit-backdrop-filter: blur(8px);
   padding: 40px 50px;
   border-radius: 20px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-  max-width: 90%;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.1);    /* 阴影一致 */
+  width: 100%;
+  max-width: 700px;
+  min-width: 320px;
+  box-sizing: border-box;
   text-align: center;
+  color: #333;                                /* 文字颜色一致 */
   animation: fadeInUp 1.5s ease-out;
   z-index: 1;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+
+/* 在手机上左右留白 */
+@media (max-width: 768px) {
+  .message-box {
+    padding: 20px 30px;  /* 较小的内边距，防止占满屏幕 */
+    margin: 0 10px;      /* 左右边距 */
+  }
 }
 
 .message-box h1 {
@@ -55,7 +74,6 @@ html, body {
   margin-left: 4px;
 }
 
-/* 添加此类，隐藏光标 */
 .no-caret::after {
   content: none !important;
   animation: none !important;
@@ -66,52 +84,29 @@ html, body {
   50% { opacity: 0; }
 }
 
-/* 爱心样式 */
+/* ------------------ 动画 ------------------ */
+@keyframes fadeSlideDown { 0% {opacity:0; transform:translateY(-30px);} 100%{opacity:1; transform:translateY(0);} }
+@keyframes fadeInFooter { 0% {opacity:0; transform:translateY(20px);} 100% {opacity:1; transform:translateY(0);} }
+@keyframes float-up {0%{transform:translateY(0) scale(1);opacity:1;}100%{transform:translateY(-30px) scale(1.5);opacity:0;}}
+
+/* ------------------ 爱心动画 ------------------ */
 .heart {
   position: absolute;
   font-size: 16px;
-  user-select: none;
-  animation: floatUp 1s ease-out forwards;
-  z-index: 1000;
   pointer-events: none;
+  animation: float-up 1s ease-out forwards;
+  will-change: transform, opacity; /* ⚡ 提前告知浏览器优化 */
 }
 
-@keyframes floatUp {
-  0% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-100px) scale(1.8);
-  }
+input[type="text"],
+textarea {
+  user-select: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
 }
 
-/* 星星样式 */
-.trail-star {
-  position: absolute;
-  font-size: 14px;
-  color: gold;
-  opacity: 0.9;
-  animation: starFade 0.8s ease-out forwards;
-  pointer-events: none;
-  z-index: 1000;
-}
 
-@keyframes starFade {
-  0% {
-    transform: scale(1);
-    opacity: 0.9;
-  }
-  100% {
-    transform: scale(0.5);
-    opacity: 0;
-  }
-}
-
-.right-align {
-  text-align: right;
-}
 
 /* 禁止文本选择 */
 body, body * {
