@@ -20,14 +20,14 @@ body {
     padding: 25px;
     text-align: center;
     border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.3);
-    background: rgba(255,255,255,0.25);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(18px);
+    border: 0px solid rgba(255,255,255,0.25);
+ /* 静态液态玻璃效果 */
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px) saturate(180%) brightness(1.1) contrast(1.05);
+    -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(1.1) contrast(1.05);
     box-shadow: 0 8px 30px rgba(0,0,0,0.1);
     color: #333;
     flex-shrink: 0;
-    opacity: 0;
     transform: translateY(-30px);
     animation: fadeSlideDown 0.8s ease-out forwards;
     will-change: transform, opacity;
@@ -53,12 +53,12 @@ select, input[type="number"] {
     width: 60%;                   /* 宽度统一 */
     padding: 10px 14px;           /* 内边距统一 */
     border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.3);
+    border: 0px solid rgba(255,255,255,0.3);
     font-size: 16px;
     margin: 10px 0 15px 0;        /* 上下间距统一，下方留空间 */
     text-align: center;
-    background: rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(12px) saturate(180%) brightness(1.05);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px) saturate(180%) brightness(1.05);
     -webkit-backdrop-filter: blur(12px) saturate(180%) brightness(1.05);
     color: #333;
     outline: none;
@@ -82,13 +82,13 @@ select, input[type="number"] {
 
 /* 选中项（始终可见） */
 .select-selected {
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(12px) saturate(180%) brightness(1.05);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px) saturate(180%) brightness(1.05);
   -webkit-backdrop-filter: blur(12px) saturate(180%) brightness(1.05);
   border-radius: 12px;
   padding: 10px 14px;
   cursor: pointer;
-  border: 1px solid rgba(255,255,255,0.3);
+  border: 0px solid rgba(255,255,255,0.3);
   color: #333;
   box-shadow: 0 4px 20px rgba(0,0,0,0.1);
   position: relative;
@@ -114,8 +114,8 @@ select, input[type="number"] {
 /* 下拉项容器 */
 .select-items {
   position: absolute;
-  background: rgba(215, 237, 253, 0.8);
-  backdrop-filter: blur(40px) saturate(180%);
+  background: rgba(17,30,44, 1);
+  backdrop-filter: blur(8px) saturate(180%);
   -webkit-backdrop-filter: blur(14px) saturate(180%);
   border-radius: 12px;
   margin-top: 6px;
@@ -138,7 +138,7 @@ select, input[type="number"] {
 
 /* hover 效果 */
 .select-items div:hover {
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(242, 230, 215,0.08);
 }
 
 /* 动画 */
@@ -163,8 +163,8 @@ select:hover, input[type="number"]:hover {
 button {
     display: block;
     margin: 0 auto 20px auto;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(12px) saturate(180%) brightness(1.05);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px) saturate(180%) brightness(1.05);
     -webkit-backdrop-filter: blur(12px) saturate(180%) brightness(1.05);
     color: #333;
     border: none;
@@ -177,7 +177,7 @@ button {
 
 button:hover {
     transform: scale(1.03);
-    background: rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.05);
     box-shadow: 0 6px 18px rgba(0,0,0,0.15);
 }
 
@@ -206,7 +206,7 @@ button:active {
 }
 
 .progress-ring circle.bg {
-    stroke: rgba(255,255,255,0.25);
+    stroke: rgba(255,255,255,0.05);
 }
 
 .progress-ring circle.progress {
@@ -272,7 +272,7 @@ body, button, select, .container, .form-group {
 /* ------------------ 爱心动画 ------------------ */
 .heart {
   position: absolute;
-  font-size: 16px;
+  font-size: 18px;
   pointer-events: none;
   animation: float-up 1s ease-out forwards;
   will-change: transform, opacity; /* ⚡ 提前告知浏览器优化 */
@@ -303,10 +303,10 @@ textarea {
     border-radius: 15px;
     font-size: 16px;
     cursor: pointer;
-    background: rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(12px) saturate(180%) brightness(1.05);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px) saturate(180%) brightness(1.05);
     -webkit-backdrop-filter: blur(12px) saturate(180%) brightness(1.05);
-    border: 1px solid rgba(255,255,255,0.3);
+    border: 0px solid rgba(255,255,255,0.3);
     color: #333;
     box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
@@ -314,7 +314,7 @@ textarea {
 
 .file-verify button:hover {
     transform: scale(1.03);
-    background: rgba(255,255,255,0.35);
+    background: rgba(255,255,255,0.05);
     box-shadow: 0 6px 18px rgba(0,0,0,0.15);
 }
 
@@ -329,3 +329,115 @@ textarea {
     color: #666;
     text-align: center;
 }
+/* ------------------ 强制 GPU 渲染，优化模糊层 ------------------ */
+button,
+input,
+textarea,
+.icon-img,
+.lang-btn {
+  will-change: transform, opacity, backdrop-filter;
+  transform: translateZ(0); /* 提升渲染性能并避免闪黑 */
+}
+
+/* ------------------ 调整全局用户选择，仅禁止非交互元素 ------------------ */
+body *:not(input):not(textarea):not(button) {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
+}
+/* ------------------ 背景元素 ------------------ */
+
+/* 渐变兜底 */
+body {
+background: linear-gradient(135deg, #1f1f1f, #3c4a57, #7a8a99);
+  );
+  background-attachment: fixed;
+  position: relative;
+  z-index: 0;
+}
+
+/* 背景图层 */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--bg) no-repeat center/cover;
+  opacity: 1; /* 想要透明度可调，改这里 */
+}
+
+/* ------------------ 动态文字颜色 ------------------ */
+:root {
+  --dynamic-text-color: #333;
+}
+
+h1, h2, h3, p, a, .subtitle, 
+.lang-btn, .lang-dropdown a, 
+.engine-dropdown div, .copyright, 
+input, input::placeholder, 
+button {
+  color: var(--dynamic-text-color) !important;
+}
+/* ========== 自定义数字输入框（玻璃加减按钮） ========== */
+.number-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 60%; /* 和之前 select/input 一致 */
+  margin: 10px 0 15px 0;
+}
+
+.number-wrapper input[type="number"] {
+  flex: 1;
+  padding: 10px 14px;
+  text-align: center;
+  border-radius: 12px;
+  border: 0px solid rgba(255,255,255,0.3);
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px) saturate(180%) brightness(1.05);
+  -webkit-backdrop-filter: blur(12px) saturate(180%) brightness(1.05);
+  color: #333;
+  outline: none;
+  box-sizing: border-box;
+  -moz-appearance: textfield; /* Firefox 隐藏箭头 */
+}
+
+/* 隐藏默认箭头 (Chrome/Safari/Edge) */
+.number-wrapper input[type=number]::-webkit-inner-spin-button,
+.number-wrapper input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* 自定义加减按钮 */
+.number-wrapper button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px) saturate(180%) brightness(1.05);
+  -webkit-backdrop-filter: blur(12px) saturate(180%) brightness(1.05);
+  border: 0px solid rgba(255,255,255,0.3);
+  color: #333;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.number-wrapper button:hover {
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.number-wrapper button:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.number-wrapper .minus { left: -40px; }
+.number-wrapper .plus { right: -40px; }

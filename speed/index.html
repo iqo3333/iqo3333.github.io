@@ -3,12 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LynnChe服务速率测试</title>
+  <title>林澈.LYC 服务速率测试</title>
+
+  <!-- 样式表 -->
   <link rel="stylesheet" href="style.css">
+
+  <!-- 浏览器图标 -->
+  <link rel="icon" href="favicon.png" type="image/png">
 </head>
-<body>
+<body style="--bg: url('image/线条.png');">
   <div class="container">
-    <h1>LynnChe服务速率测试</h1>
+    <h1>林澈.LYC 服务速率测试</h1>
 
     <!-- 文件上传验证白名单 -->
     <div class="file-verify">
@@ -21,9 +26,10 @@
       <div class="custom-select">
         <div class="select-selected">请选择域名</div>
         <div class="select-items">
-          <div data-value="https://www.iqo3333.cn">LynnChe私人邮箱</div>
-          <div data-value="https://tab.iqo3333.cn">LynnChe-标签页</div>
-          <div data-value="https://vip.iqo3333.cn">LynC视频解析</div>
+          <div data-value="https://www.iqo3333.cn">林澈.LYC私人邮箱</div>
+          <div data-value="https://tab.iqo3333.cn">林澈.LYC-标签页</div>
+          <div data-value="https://vip.iqo3333.cn">林澈.LYC视频解析</div>
+          <div data-value="https://iqo3333.github.io">林澈.LYC-Github</div>
         </div>
       </div>
     </div>
@@ -31,9 +37,14 @@
     <!-- 循环次数输入 -->
     <div class="form-group">
       <label for="loop-count">循环次数（下载次数）：</label>
-      <input type="number" id="loop-count" value="5" min="1" max="20">
+      <div class="number-wrapper">
+        <button class="minus">-</button>
+        <input type="number" id="loop-count" min="1" max="99" value="1">
+        <button class="plus">+</button>
+      </div>
     </div>
 
+    <!-- 开始测速按钮 -->
     <button id="start-test">开始测速</button>
 
     <!-- 进度环 -->
