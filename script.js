@@ -1,6 +1,6 @@
 const lines = [
-  "感谢一路陪伴与信任，本站已于 2025年7月25日 起停止服务。",
-  "每一次访问，都是我前行的动力。祝您未来一切顺利！",
+  "欢迎使用林澈.LYC-CDN服务",
+  "你可以联系我将你的文件存放在我这里，以帮助你随时随地访问下载",
   "——林澈.LYC"
 ];
 
@@ -78,3 +78,4 @@ window.addEventListener('keydown', function(e) {
     e.preventDefault();
   }
 });
+
