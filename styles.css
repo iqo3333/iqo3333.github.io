@@ -1,0 +1,163 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  font-family: "Segoe UI", "Helvetica Neue", "Arial", sans-serif;
+  background: linear-gradient(135deg, #1f1f1f, #3c4a57, #7a8a99);
+  background-size: cover;
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+  overflow: hidden;
+  cursor: default;
+}
+
+/* ------------------ 父容器样式：液态玻璃设计 ------------------ */
+.message-box {
+  position: relative;
+  z-index: 998;
+  width: auto;               /* 宽度随内容增长 */
+  max-width: none;           /* PC 端不限制最大宽度 */
+  min-width: 280px;
+  margin: 40px;
+  padding: 25px;
+  text-align: center;
+  border-radius: 20px;
+  border: 0px solid rgba(255,255,255,0.25);
+
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px) saturate(180%) brightness(1.1) contrast(1.05);
+  -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(1.1) contrast(1.05);
+
+  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  color: #333;
+  flex-shrink: 0;
+
+  white-space: nowrap;       /* 默认：禁止换行 */
+  overflow-x: auto;          /* 超出时出现横向滚动条 */
+}
+
+/* ------------------ 响应式适配（手机端） ------------------ */
+@media (max-width: 768px) {
+  .message-box {
+    margin: 20px;
+    padding: 20px;
+
+    max-width: 85vw;         /* 限制最大宽度为屏幕 90% */
+    white-space: normal;     /* 允许换行 */
+    word-break: break-word;  /* 避免长字符串撑破容器 */
+    overflow-x: hidden;      /* 禁止横向滚动 */
+  }
+}
+
+/* ------------------ 内部文字 ------------------ */
+.message-box h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.message-box p {
+  font-size: 18px;
+  line-height: 1.8;
+  color: #444;
+  margin: 10px 0;
+}
+
+/* ------------------ 类型机效果 ------------------ */
+.typewriter-text::after {
+  content: '|';
+  animation: blink 1s infinite;
+  margin-left: 4px;
+}
+
+.no-caret::after {
+  content: none !important;
+  animation: none !important;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes blink { 
+  0%, 100% { opacity: 1; } 
+  50% { opacity: 0; } 
+}
+
+
+/* ------------------ 动画 ------------------ */
+@keyframes fadeSlideDown { 0% {opacity:0; transform:translateY(-30px);} 100%{opacity:1; transform:translateY(0);} }
+@keyframes fadeInFooter { 0% {opacity:0; transform:translateY(20px);} 100% {opacity:1; transform:translateY(0);} }
+@keyframes float-up {0%{transform:translateY(0) scale(1);opacity:1;}100%{transform:translateY(-30px) scale(1.5);opacity:0;}}
+
+/* ------------------ 爱心动画 ------------------ */
+.heart {
+  position: fixed;   /* 改为 fixed，确保它相对于视口进行定位 */
+  font-size: 16px;
+  pointer-events: none;
+  animation: float-up 1s ease-out forwards;
+  will-change: transform, opacity; /* ⚡ 提前告知浏览器优化 */
+}
+
+
+input[type="text"],
+textarea {
+  user-select: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+}
+
+
+
+/* 禁止文本选择 */
+body, body * {
+  -webkit-user-select: none;  /* Safari */
+  -moz-user-select: none;     /* Firefox */
+  -ms-user-select: none;      /* IE10+ */
+  user-select: none;          /* 标准 */
+  -webkit-touch-callout: none; /* 禁止iOS长按弹出菜单 */
+}
+
+/* 禁止拖动图片或其他元素 */
+img, a, button {
+  -webkit-user-drag: none;
+  user-drag: none;
+}
+/* ------------------ 背景元素 ------------------ */
+
+/* 渐变兜底 */
+body {
+background: linear-gradient(135deg, #1f1f1f, #3c4a57, #7a8a99);
+  );
+  background-attachment: fixed;
+  position: relative;
+  z-index: 0;
+}
+
+/* 背景图层 */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--bg) no-repeat center/cover;
+  opacity: 1; /* 想要透明度可调，改这里 */
+}
+
+/* ------------------ 动态文字颜色 ------------------ */
+:root {
+  --dynamic-text-color: #fff;
+}
+
+h1, h2, h3, p, a, .subtitle, 
+typewriter-text, .lang-dropdown a, 
+.engine-dropdown div, .copyright, 
+input, input::placeholder, 
+button {
+  color: var(--dynamic-text-color) !important;
+}
